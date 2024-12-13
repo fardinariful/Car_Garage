@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import img1 from '../../assets/assets/images/login/login.svg'
 import { FaFacebook, FaGoogle,  FaLinkedin } from "react-icons/fa";
 import { useContext } from 'react';
@@ -6,6 +6,7 @@ import { AuthContext } from '../../Provider/AuthProvider';
 const Login = () => {
 
     const {login}=useContext(AuthContext);
+    const navigate=useNavigate();
 
 
     const handleSubmit=e=>{
@@ -14,11 +15,13 @@ const Login = () => {
         const email=form.email.value;
         const password=form.password.value;
         const allinfo={email,password}
-        console.log(allinfo);
+        console.log('Here is the info:',allinfo);
         login(email,password)
         .then(result=>{
             const user=result.user;
             console.log(user);
+            navigate('/');
+            form.reset();
         })
         .catch(error=>{
             console.log(error);
@@ -49,7 +52,7 @@ const Login = () => {
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <Link to='/' className="btn bg-[#FF3811] text-white">Signin</Link>
+                            <button  className="btn bg-[#FF3811] text-white">Signin</button>
                         </div>
                         <div className='flex flex-col gap-3 items-center'>
                             <p className='text-[#444444] font-medium'>Or Sign In with</p>

@@ -4,14 +4,14 @@ import { useContext } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 
 const Navbar = () => {
-const {user,setUser,logout}=useContext(AuthContext);
+const {user,logout}=useContext(AuthContext);
     const link = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/about'>About</NavLink></li>
-        { user?.email ? <li><NavLink to='/booking'>My Booking</NavLink></li> : <></>}
-        
-
-
+        <li>
+            {user?.email ? <NavLink to='/booking'> My Booking</NavLink> : <></>
+            }
+        </li>
     </>
 
     
@@ -49,7 +49,7 @@ const {user,setUser,logout}=useContext(AuthContext);
                 </ul>
             </div>
             <div className="navbar-end">
-                {user && user?.email}
+              {user && user?.email}
                 {
                     
                     user && user?.email ? 
