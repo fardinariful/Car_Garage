@@ -1,15 +1,13 @@
-import swal from 'sweetalert';
 
-const BookingRow = ({ booking }) => {
-    const { Customer_Name, price, service, img, Date,_id } = booking;
-    const handleDelete=id=>{
-        
 
-    }
+const BookingRow = ({ booking,handleDelete,handleConfirm }) => {
+    const {status, Customer_Name, price, service, img, Date, _id } = booking;
+
+  
     return (
         <tr>
             <th>
-                <button onClick={()=>handleDelete(_id)} className="btn btn-circle">
+                <button onClick={() => handleDelete(_id)} className="btn btn-circle">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6"
@@ -43,8 +41,13 @@ const BookingRow = ({ booking }) => {
             <td>{price}</td>
             <td>{Date}</td>
             <th>
-                <button className="btn btn-ghost btn-xs">{service}</button>
+                <p >{service}</p>
             </th>
+            <th>
+                {
+                    status==='confirm' ? <span className="font-bold text-green-600">Confirmed</span> :<button onClick={()=>handleConfirm(_id)}> Please Confirm</button>
+                }
+                </th>
         </tr>
     );
 };
